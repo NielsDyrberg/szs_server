@@ -23,6 +23,18 @@ target_sources(${PROJECT_NAME} INTERFACE
         )
 
 ##########################################################################################
+################################   Find BCM2835   ########################################
+##########################################################################################
+
+# This finds the asound library
+find_library(mybcm2835 bcm2835)
+if(${mybcm2835})
+    message(FATAL_ERROR "bcm2835 lib not found")
+else()
+    message(STATUS "bcm2835 lib found as ${mybcm2835}")
+endif()
+
+##########################################################################################
 ###########################   Add subdirectories   #######################################
 ##########################################################################################
 
@@ -30,7 +42,7 @@ target_sources(${PROJECT_NAME} INTERFACE
 add_subdirectory(extern)
 
 # Link libraries to project
-target_link_libraries(${PROJECT_NAME} INTERFACE BCM2835 szs_soundzone_protocol)
+target_link_libraries(${PROJECT_NAME} INTERFACE ${mybcm2835} szs_soundzone_protocol)
 
 ##########################################################################################
 ########################   Make excecutable project   ####################################
