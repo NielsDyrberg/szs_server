@@ -5,11 +5,11 @@
 #ifndef SOUNDZONE_SERVER_SZS_SERVER_H
 #define SOUNDZONE_SERVER_SZS_SERVER_H
 
-#include "szs_server/szp_handler.h"
-#include "szs_server/sync_handler.h"
+#include "szp_handler.h"
+#include "sync_handler.h"
 
 //todo Update to 8 when ready
-#define NUMBER_OF_SLAVES 1
+#define NUMBER_OF_SLAVES 2
 
 class SZS_server{
 private:

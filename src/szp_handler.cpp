@@ -2,7 +2,7 @@
 // Created by ncpd on 15-11-2021.
 //
 
-#include "szs_server/szp_handler.h"
+#include "szp_handler.h"
 
 static char song[] = "/usr/local/music/epic_sax_guy.wav";
 
@@ -14,9 +14,9 @@ SZP_handler::SZP_handler(int number_of_slaves, char** slave_ips) {
     this->song_buffer = new uint8_t[SONG_BUFF_SIZE];
     this->song_fd = nullptr;
     this->number_of_slaves = number_of_slaves;
+    this->connected_slaves = {0};
     this->slave_ips = slave_ips;
     this->slaves = new SZP_master[number_of_slaves];
-
     setup();
 }
 
@@ -49,7 +49,6 @@ int SZP_handler::load_song(char *song_path) {
 }
 
 int SZP_handler::read_and_send_song() {
-    unsigned int bytes_read = 0;
     int err = 0;
 
     while(err > -1){
@@ -63,9 +62,11 @@ int SZP_handler::read_and_send_song_packet() {
 
     bytes_read = fread(song_buffer, 1, SONG_BUFF_SIZE, song_fd);
     if (bytes_read > 0){
+
         for (int i = 0; i < number_of_slaves; i++) {
             slaves[i].send_sound_packet(song_buffer, bytes_read);
         }
+
     } else{
         fclose(song_fd);
         std::cout << "Song end, [szp_master, send_sound_packet()]" << std::endl;
