@@ -20,11 +20,8 @@ SZS_server::SZS_server(){
 
 int SZS_server::run() {
 
-    std::thread t_szp(&SZS_server::run_szp_handler, szp);
-    std::thread t_alsa(&SZS_server::run_sync_handler, sync);
-
-    t_szp.join();
-    t_alsa.join();
+    sync->run();
+    szp->run();
 
     return 0;
 }
@@ -34,10 +31,3 @@ int SZS_server::run() {
  * Private methods
  **********************************************************************************************************************/
 
-void SZS_server::run_szp_handler(SZP_handler* szp_handler) {
-    szp_handler->run();
-}
-
-void SZS_server::run_sync_handler(SYNC_handler* sync_handler){
-    sync_handler->run();
-}

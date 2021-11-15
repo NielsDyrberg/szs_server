@@ -10,7 +10,7 @@ SYNC_handler::SYNC_handler() {
 
 void SYNC_handler::run() {
 
-    while(true){
-        //Nah
+    for (int i = 0; i < 1000; i++) {
+        //
     }
 }

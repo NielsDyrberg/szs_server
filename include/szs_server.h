@@ -16,9 +16,6 @@ private:
     SZP_handler* szp;
     SYNC_handler* sync;
 
-    static void run_szp_handler(SZP_handler* szp_handler);
-    static void run_sync_handler(SYNC_handler* sync_handler);
-
 protected:
 public:
     SZS_server();
