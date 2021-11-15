@@ -11,11 +11,14 @@
 
 #define SONG_BUFF_SIZE 1028
 
+
 class SZP_handler{
 private:
     int number_of_slaves;
     char** slave_ips;
     SZP_master* slaves;
+    bool* active_slaves;
+
     FILE* song_fd;
     uint8_t* song_buffer;
 
