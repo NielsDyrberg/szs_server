@@ -4,14 +4,13 @@
 #include <iostream>
 #include "szs_server.h"
 
-char slave_1_Ip[] = "192.168.0.103";
-
-uint8_t msg[] = {3,12,42,3,43,25,23,235,21,162,113,64,0,111};
+#define SZS_DEBUG
 
 void test_send_sound_packet(){
     SZS_server server;
-    server.sl.add_slave(1 ,slave_1_Ip, true);
-    server.sl.slave_1->send_sound_packet(msg, sizeof(msg));
+
+    server.run();
+
     std::cout << " " << std::endl;
 }
 
