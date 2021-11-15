@@ -6,6 +6,8 @@
 
 static char song[] = "/usr/local/music/epic_sax_guy.wav";
 
+int debug_i = 0;
+
 /**********************************************************************************************************************
  * Public methods
  **********************************************************************************************************************/
@@ -14,7 +16,7 @@ SZP_handler::SZP_handler(int number_of_slaves, char** slave_ips) {
     this->song_buffer = new uint8_t[SONG_BUFF_SIZE];
     this->song_fd = nullptr;
     this->number_of_slaves = number_of_slaves;
-    this->connected_slaves = {0};
+    this->active_slaves = new bool[number_of_slaves];
     this->slave_ips = slave_ips;
     this->slaves = new SZP_master[number_of_slaves];
     setup();
@@ -65,6 +67,10 @@ int SZP_handler::read_and_send_song_packet() {
 
         for (int i = 0; i < number_of_slaves; i++) {
             slaves[i].send_sound_packet(song_buffer, bytes_read);
+            debug_i++;
+            if(debug_i>= 100){
+                std::cout<< "dfs" ;
+            }
         }
 
     } else{
@@ -79,9 +85,11 @@ int SZP_handler::setup() {
     int err;
 
     for (int i = 0; i < number_of_slaves; i++) {
-        err = add_slave(i ,slave_ips[i], true);
-        if(err < 0){
-            std::cout << "Slave " << i << " did not setup, [SZS_server, setup()]" << std::endl;
+        if (!active_slaves[i]){
+            err = add_slave(i ,slave_ips[i], true);
+            if(err < 0){
+                std::cout << "Slave " << i << " did not setup, [SZS_server, setup()]" << std::endl;
+            }
         }
     }
     return 0;
@@ -89,12 +97,25 @@ int SZP_handler::setup() {
 
 
 int SZP_handler::add_slave(int slave_number, char* host, bool is_ip) {
+    int err;
+
     if (slave_number >= number_of_slaves){
         std::cout << "There can only be 8 slaves, [SZS_server, add_slave(int slave_number, char* host, bool is_ip)]" << std::endl;
         return -1;
     }
+
+    std::cout << "Adding slave " << slave_number
+              << ", [szp_handler, add_slave(int slave_number, char* host, bool is_ip)]" << std::endl;
+
     slaves[slave_number] = SZP_master(host, is_ip);
     //todo check successful with check_connection
+    err = slaves[slave_number].check_connection();
+    if(err < 0){
+        std::cout << "No connection to slave no " << slave_number
+        << ", [szp_handler, add_slave(int slave_number, char* host, bool is_ip)]" << std::endl;
+    } else{
+        active_slaves[slave_number] = true;
+    }
 
     return 0;
 }

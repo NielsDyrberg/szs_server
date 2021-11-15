@@ -11,23 +11,13 @@
 
 #define SONG_BUFF_SIZE 1028
 
-typedef struct {
-    uint8_t slave_1: 1;
-    uint8_t slave_2: 1;
-    uint8_t slave_3: 1;
-    uint8_t slave_4: 1;
-    uint8_t slave_5: 1;
-    uint8_t slave_6: 1;
-    uint8_t slave_7: 1;
-    uint8_t slave_8: 1;
-} connected_slaves;
 
 class SZP_handler{
 private:
     int number_of_slaves;
     char** slave_ips;
     SZP_master* slaves;
-    connected_slaves connected_slaves;
+    bool* active_slaves;
 
     FILE* song_fd;
     uint8_t* song_buffer;
