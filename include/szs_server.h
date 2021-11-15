@@ -5,26 +5,19 @@
 #ifndef SOUNDZONE_SERVER_SZS_SERVER_H
 #define SOUNDZONE_SERVER_SZS_SERVER_H
 
-#include "szp_master.h"
-
-#define COMM_BUFFER_SIZE 4096
-#define SONG_BUFF_SIZE 1028
+#include "szs_server/szp_handler.h"
+#include "szs_server/sync_handler.h"
 
 //todo Update to 8 when ready
 #define NUMBER_OF_SLAVES 1
 
 class SZS_server{
 private:
-    uint8_t* comm_buffer;
-    FILE* song_fd;
-    uint8_t* song_buffer;
-    SZP_master* slaves;
+    SZP_handler* szp;
+    SYNC_handler* sync;
 
-    int setup();
-    int add_slave(int slave_number, char* host, bool is_ip);
-    int load_song(char* song_path);
-    int read_and_send_song();
-    int read_and_send_song_packet();
+    static void run_szp_handler(SZP_handler* szp_handler);
+    static void run_sync_handler(SYNC_handler* sync_handler);
 
 protected:
 public:

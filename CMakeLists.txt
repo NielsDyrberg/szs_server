@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16) # CMake version check
-project(soundzone_server_lib VERSION 0.0.1) # Create project "soundzone_server"
+project(soundzone_server_lib VERSION 0.0.3) # Create project "soundzone_server"
 set(CMAKE_CXX_STANDARD 20) # Enable c++14 standard
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
@@ -19,7 +19,8 @@ target_include_directories(${PROJECT_NAME} INTERFACE
 
 target_sources(${PROJECT_NAME} INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/szs_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/slaves.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/sync_handler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/szp_handler.cpp
         )
 
 ##########################################################################################
@@ -35,6 +36,18 @@ else()
 endif()
 
 ##########################################################################################
+################################   Find pthread   ########################################
+##########################################################################################
+
+# This finds the pthread library
+find_library(mypthreadlib pthread)
+if(${mypthreadlib})
+    message(FATAL_ERROR "pthread lib not found")
+else()
+    message(STATUS "pthread lib found as ${mypthreadlib}")
+endif()
+
+##########################################################################################
 ###########################   Add subdirectories   #######################################
 ##########################################################################################
 
@@ -42,7 +55,7 @@ endif()
 add_subdirectory(extern)
 
 # Link libraries to project
-target_link_libraries(${PROJECT_NAME} INTERFACE ${mybcm2835} szs_soundzone_protocol)
+target_link_libraries(${PROJECT_NAME} INTERFACE ${mybcm2835} ${mypthreadlib} szs_soundzone_protocol)
 
 ##########################################################################################
 ########################   Make excecutable project   ####################################
