@@ -13,13 +13,13 @@ project(szs_datatransport VERSION 0.1.4) # Create project "szs_datastransport"
 add_library(szs_datatransport INTERFACE)
 
 target_include_directories(szs_datatransport INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        include
         )
 
 target_sources(szs_datatransport INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/dataTransport.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/udp_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/udp_server.cpp
+        src/dataTransport.cpp
+        src/udp_client.cpp
+        src/udp_server.cpp
         )
 
 add_subdirectory(tests)

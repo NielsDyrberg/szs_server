@@ -13,13 +13,13 @@ project(szs_time_sync VERSION 0.1.0) # Create project "szs_time_sync"
 add_library(szs_time_sync INTERFACE)
 
 target_include_directories(szs_time_sync INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        include
         )
 
 target_sources(${PROJECT_NAME} INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/syncMaster.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/syncSlave.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/timeKeeper.cpp
+        src/syncMaster.cpp
+        src/syncSlave.cpp
+        src/timeKeeper.cpp
         )
 
 ##########################################################################################
