@@ -9,7 +9,7 @@
 #include "sync_handler.h"
 
 //todo Update to 8 when ready
-#define NUMBER_OF_SLAVES 2
+#define NUMBER_OF_SLAVES 1
 
 class SZS_server{
 private:
@@ -18,7 +18,7 @@ private:
 
 protected:
 public:
-    SZS_server();
+        SZS_server();
     int run();
 
 };
