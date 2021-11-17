@@ -5,7 +5,8 @@
 #ifndef SOUNDZONE_SERVER_LIB_SYNC_HANDLER_H
 #define SOUNDZONE_SERVER_LIB_SYNC_HANDLER_H
 
-#include "syncMaster.h"
+
+#include "../extern/szs_time_sync/include/syncMaster.h"
 
 
 class SYNC_handler{

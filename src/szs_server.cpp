@@ -6,7 +6,7 @@
 
 #include "szs_server.h"
 
-static char* slave_ips[] = {"192.168.1.46", "192.168.1.10", nullptr, nullptr,
+static char* slave_ips[] = {"192.168.0.103", "192.168.0.101", nullptr, nullptr,
                             nullptr, nullptr, nullptr, nullptr};
 
 /**********************************************************************************************************************
@@ -15,7 +15,7 @@ static char* slave_ips[] = {"192.168.1.46", "192.168.1.10", nullptr, nullptr,
 
 SZS_server::SZS_server(){
     szp = new SZP_handler(NUMBER_OF_SLAVES, slave_ips);
-    sync = new SYNC_handler();
+    sync = new SYNC_handler(NUMBER_OF_SLAVES, slave_ips);
 };
 
 int SZS_server::run() {

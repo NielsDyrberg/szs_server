@@ -55,7 +55,7 @@ endif()
 add_subdirectory(extern)
 
 # Link libraries to project
-target_link_libraries(${PROJECT_NAME} INTERFACE ${mybcm2835} ${mypthreadlib} szs_soundzone_protocol extern/szs_time_sync)
+target_link_libraries(${PROJECT_NAME} INTERFACE ${mybcm2835} ${mypthreadlib} szs_soundzone_protocol szs_time_sync)
 
 ##########################################################################################
 ########################   Make excecutable project   ####################################
