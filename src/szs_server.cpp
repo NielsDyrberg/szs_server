@@ -6,7 +6,7 @@
 
 #include "szs_server.h"
 
-static char* slave_ips[] = {"192.168.0.103", nullptr, nullptr, nullptr,
+static char* slave_ips[] = {"192.168.0.103", "192.168.0.101", nullptr, nullptr,
                             nullptr, nullptr, nullptr, nullptr};
 
 /**********************************************************************************************************************

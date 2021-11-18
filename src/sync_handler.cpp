@@ -57,12 +57,8 @@ int SYNC_handler::synchronize(){
 
     for (int i = 0; i < number_of_slaves; i++) {
         jump :
-
-        std::cout << "lige før ACCp" << std::endl;
         slaves[i].SyncReq_and_accept();
-        std::cout << "ACCp" << std::endl;
         slaves[i].Send_TS23();
-        std::cout << "Burde have sent" << std::endl;
         if (!slaves[i].Wait_for_Sync_OK()){
             goto jump;
         }
