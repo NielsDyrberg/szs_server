@@ -15,7 +15,6 @@ SYNC_handler::SYNC_handler(int number_of_slaves, char** slaves_ips) {
 }
 
 void SYNC_handler::run() {
-
     reset_time();
     synchronize();
 }
@@ -62,7 +61,7 @@ int SYNC_handler::synchronize(){
         if (!slaves[i].Wait_for_Sync_OK()){
             goto jump;
         }
-        std::cout<<"Successful sync to client: "<< i+1 << std::endl;
+        std::cout<<" \033[1;32mThe synchronization of slave " << i << " was successful\033[0m\n "<<std::endl;
     }
     return 0;
 }
