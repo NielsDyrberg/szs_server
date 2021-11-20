@@ -18,7 +18,7 @@ private:
 
 protected:
 public:
-    SZS_server();
+        SZS_server();
     int run();
 
 };
