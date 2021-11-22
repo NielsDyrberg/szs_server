@@ -16,9 +16,16 @@ private:
     SZP_handler* szp;
     SYNC_handler* sync;
 
+    /**
+     * @brief Addeds a time delay to play_time
+     * @param[in,out] play_time in - time_now, out - time_new + delay
+     * @return 0
+     */
+    static int make_play_time(long long int *time_play);
+
 protected:
 public:
-    SZS_server();
+        SZS_server();
     int run();
 
 };

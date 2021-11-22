@@ -22,6 +22,8 @@ private:
     FILE* song_fd;
     uint8_t* song_buffer;
 
+    long long int play_time;
+
     int load_song(char* song_path);
     int read_and_send_song();
     int read_and_send_song_packet();
@@ -30,7 +32,7 @@ private:
 
 public:
     SZP_handler(int number_of_slaves, char** slaves_ips);
-    int run();
+    int run(long long int play_time);
 
 
 };
