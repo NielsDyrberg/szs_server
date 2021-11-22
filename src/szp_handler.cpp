@@ -24,11 +24,13 @@ SZP_handler::SZP_handler(int number_of_slaves, char** slave_ips) {
     this->active_slaves = new bool[number_of_slaves];
     this->slave_ips = slave_ips;
     this->slaves = new SZP_master[number_of_slaves];
+    this->play_time = 0;
     setup();
 }
 
-int SZP_handler::run() {
+int SZP_handler::run(long long int play_time) {
     int err;
+    this->play_time = play_time;
 
     err = load_song(song);
     if(err < 0){
@@ -71,7 +73,8 @@ int SZP_handler::read_and_send_song_packet() {
     if (bytes_read > 0){
         debug_i++;
         for (int i = 0; i < number_of_slaves; i++) {
-            slaves[i].send_sound_packet(song_buffer, bytes_read);
+            slaves[i].send_sound_packet(song_buffer, bytes_read, play_time);
+            usleep(100);
         }
 
     } else{

@@ -17,6 +17,10 @@ SYNC_handler::SYNC_handler(int number_of_slaves, char** slaves_ips) {
 void SYNC_handler::run() {
     reset_time();
     synchronize();
+
+    sleep(4);
+
+    get_time();
 }
 
 
@@ -64,4 +68,13 @@ int SYNC_handler::synchronize(){
         std::cout<<" \033[1;32mThe synchronization of slave " << i << " was successful\033[0m\n "<<std::endl;
     }
     return 0;
+}
+
+long long int SYNC_handler::get_time() {
+    long long int tmp_time = 0;
+    for (int i = 0; i < number_of_slaves; i++){
+        tmp_time = slaves[i].Get_Time();
+        std::cout << "Slave " << i << ", time : " << tmp_time << std::endl;
+    }
+    return tmp_time;
 }

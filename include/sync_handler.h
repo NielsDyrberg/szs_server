@@ -23,7 +23,7 @@ public:
     int add_slave(int slave_number, char* host, bool is_ip);
     void reset_time();
     int synchronize();
-
+    long long int get_time();
 };
 
 #endif //SOUNDZONE_SERVER_LIB_SYNC_HANDLER_H
