@@ -69,12 +69,12 @@ int SZP_handler::read_and_send_song() {
 int SZP_handler::read_and_send_song_packet() {
     unsigned int bytes_read = 0;
 
-    bytes_read = fread(song_buffer, 1, SONG_BUFF_SIZE-700, song_fd);
+    bytes_read = fread(song_buffer, 1, SONG_BUFF_SIZE, song_fd);
     if (bytes_read > 0){
         debug_i++;
         for (int i = 0; i < number_of_slaves; i++) {
             slaves[i].send_sound_packet(song_buffer, bytes_read, play_time);
-            usleep(100);
+            usleep(130);
         }
 
     } else{

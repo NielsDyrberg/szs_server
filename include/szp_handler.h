@@ -9,7 +9,7 @@
 
 #include "szp_master.h"
 
-#define SONG_BUFF_SIZE 1028
+#define SONG_BUFF_SIZE 256
 
 
 class SZP_handler{

@@ -6,8 +6,8 @@
 
 #include "szs_server.h"
 
-static char* slave_ips[] = {"192.168.1.47", "192.168.1.48", nullptr, nullptr,
-                            nullptr, nullptr, nullptr, nullptr};
+static char* slave_ips[] = {"192.168.0.131", "192.168.0.132", "192.168.0.", "192.168.0.",
+                            "192.168.0.", "192.168.0.", nullptr, nullptr};
 
 static long long int delay_time = 15000000; // Wait 15 s
 
