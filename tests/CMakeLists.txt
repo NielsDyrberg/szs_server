@@ -1,2 +1,3 @@
 
-add_subdirectory(test_send_packet)
+add_subdirectory(test_sync_jitter)
+add_subdirectory(test_sync_timeToSync)
